@@ -50,28 +50,18 @@ const solve = () => {
   joinValues();
   const data = submission.join("");
   console.log("data", data);
-  const options = {
-    method: "POST",
-    url: "https://solve-sudoku.p.rapidapi.com/",
-    headers: {
-      "content-type": "application/json",
-      "x-rapidapi-host": "solve-sudoku.p.rapidapi.com",
-      "x-rapidapi-key": "",
-    },
-    data: {
-      puzzle: data,
-    },
-  };
 
-  axios
-    .request(options)
-    .then((response) => {
-      console.log(response.data);
-      populateValues(response.data.solvable, response.data.solution);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  fetch("http://localhost:8000/solve", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log("Error:", error));
 };
 
 solveButton.addEventListener("click", solve);
