@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/solve", (req, res) => {
-  console.log(req);
+  console.log();
   const options = {
     method: "POST",
     url: "https://solve-sudoku.p.rapidapi.com/",
@@ -19,11 +19,10 @@ app.post("/solve", (req, res) => {
       "x-rapidapi-key": process.env.RAPID_API_KEY,
     },
     data: {
-      puzzle:
-        "2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3",
+      puzzle: req.body.numbers,
     },
   };
-
+  // 46:34
   axios
     .request(options)
     .then((response) => {
