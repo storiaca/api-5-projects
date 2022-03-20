@@ -2,7 +2,7 @@ const puzzleBoard = document.querySelector("#puzzle");
 const solveButton = document.querySelector("#solve-button");
 const solutionDisplay = document.getElementById("solution");
 const squares = 81;
-const submission = [];
+let submission = [];
 
 for (let i = 0; i < squares; i++) {
   const inputElement = document.createElement("input");
@@ -60,7 +60,11 @@ const solve = () => {
     body: JSON.stringify(data),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log(data);
+      populateValues(data.solvable, data.solution);
+      submission = [];
+    })
     .catch((error) => console.log("Error:", error));
 };
 
