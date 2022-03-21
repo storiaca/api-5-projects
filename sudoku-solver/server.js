@@ -22,7 +22,7 @@ app.post("/solve", (req, res) => {
       puzzle: req.body.numbers,
     },
   };
-  // 46:34
+
   axios
     .request(options)
     .then((response) => {
